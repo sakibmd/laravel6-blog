@@ -21,6 +21,7 @@ Route::get('/category/{slug}', 'PostController@postByCategory')->name('category.
 Route::get('/tag/{slug}', 'PostController@postByTag')->name('tag.posts');
 
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
+Route::post('report', 'SubscriberController@report')->name('report.store');
 
 Route::get('search' , 'SearchController@search')->name('search'); 
 
@@ -51,6 +52,9 @@ Route::group([
     Route::get('/favorite','FavoriteController@index')->name('favorite.index');
 
     Route::get('settings','SettingsController@index')->name('settings');
+
+    // Route::get('report','PostController@report')->name('post.report');
+
     Route::put('profile-update','SettingsController@updateProfile')->name('profile.update');
     Route::put('password-update','SettingsController@updatePassword')->name('password.update');
 
@@ -63,6 +67,9 @@ Route::group([
 
     Route::get('subscriber','SubscriberController@index')->name('subscriber.index');
     Route::delete('subscriber/{subscriber}','SubscriberController@deleteSubscriberFunction')->name('subscriber.destroy');
+
+    Route::get('report','SubscriberController@showAllReport')->name('report.show');
+    Route::delete('report/{report}','SubscriberController@deleteReport')->name('report.destroy');
 
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');

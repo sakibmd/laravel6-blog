@@ -9,6 +9,7 @@ use App\Notifications\AuthorPostApproved;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
+use App\Report;
 use App\Tag; 
 use App\User;
 use Illuminate\Http\Request;
@@ -112,6 +113,26 @@ class PostController extends Controller
 
     return redirect(route('admin.post.index'))->with('success', 'Post Inserted Successfully');
     }
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function pending(){

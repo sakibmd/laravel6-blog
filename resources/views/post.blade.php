@@ -42,6 +42,12 @@
 
 						<div class="blog-post-inner">
 
+							 @if (session()->has('report'))
+								<div class="alert alert-success m-3 text-center" role="alert">
+									{{ session()->get('report') }}
+								</div>
+							@endif 
+
 							<div class="post-info">
 
 								<div class="left-area">
@@ -86,9 +92,8 @@
                                             </form>
                                     @endguest
                                                             
-                                                        </li>
-                                                        <li><a href="#" onclick="comment()"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
-                                                    <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
+                                        <li><a href="#" onclick="comment()"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                                        <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
 							</ul>
 
 							
@@ -121,6 +126,81 @@
 							</ul>
 
 						</div><!-- subscribe-area -->
+
+						<div class="report-area" style="margin: 60px 20px;">
+							<!-- Trigger the modal with a button -->
+							<button type="button" class="btn btn-warning btn-md btn-block" data-toggle="modal" data-target="#myModal">
+							Report This Post</button>
+
+						<!-- Modal -->
+							<div id="myModal" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+							
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title"><strong>Why do you report this post?</strong></h4>
+										</div>
+									<div class="modal-body">
+
+										<form action="{{ route('report.store') }}" method="POST">
+											@csrf
+
+											<div class="form-group form-float">
+												<div class="form-line">									
+													<input required type="text" class="form-control" placeholder="Enter your name" name="name">									
+												</div>
+											</div>
+
+											<div class="form-group form-float">
+												<div class="form-line">
+												{{-- <textarea class="form-control" name="report" id="report" cols="30" rows="4" placeholder="enter your reason"></textarea> --}}
+												
+												<input checked type="radio" id="1" name="report" value="It's harassment or hate Speech">
+												<label for="1">It's harassment or hate Speech</label><br>
+												<input type="radio" id="2" name="report" value="Fake News">
+												<label for="2">Fake News</label><br>
+												<input type="radio" id="3" name="report" value="Spam & Scam">
+												<label for="3">Spam & Scam</label> <br>
+												<input type="radio" id="4" name="report" value="It's threatening and violent">
+												<label for="4">It's threatening and violent</label> 
+
+												</div>
+											</div>
+
+											<div class="form-group form-float">
+												<div class="form-line">
+													<input type="hidden" value="{{ $post->id }}" name="post_id">											
+												</div>
+											</div>
+
+										
+
+											<div class="form-group form-float">
+												<div class="form-line">									
+													<input type="hidden" value="{{ $post->title }}" name="post_title">									
+												</div>
+											</div>
+
+											
+				
+				
+											<a class="btn btn-danger waves-effect m-t-15" href="{{ route('post.details', $post->slug) }}">Back</a>
+											<button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
+										</form>
+
+
+
+										
+									</div>
+									{{-- <div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div> --}}
+								</div>
+							
+								</div>
+							</div>
+						</div>
 
 					</div><!-- info-area -->
 

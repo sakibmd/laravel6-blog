@@ -12,7 +12,24 @@
     <div class="container-fluid">
 
                  
-   <a href="{{ route('admin.post.index') }}" class="btn btn-danger wave-effect" >BACK</a>
+   <a href="{{ URL::previous() }}" class="btn btn-success wave-effect" >BACK</a>
+
+
+
+
+
+   <button class="btn btn-danger waves-effect m-auto" type="button" onclick="deletePost({{ $post->id }})">
+       Delete
+    </button>
+
+    <form id="delete-form-{{ $post->id }}" action="{{ route('admin.post.destroy',$post->id) }}" method="POST" style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
+
+
+
+
 
    @if($post->is_approved == false)
    <button type="button" class="btn btn-success wave-effect pull-right" onclick="approvePost({{ $post->id }})">
@@ -62,7 +79,7 @@
                     <div class="body">
                      
                         @foreach ($post->categories as $category)
-                    <span style="font-size: 15px" class="label bg-green">{{ $category->name }}</span>
+                    <span style="font-size: 15px;" class="label bg-green mb-2">{{ $category->name }}</span>
                         @endforeach
                      
                     </div>
@@ -77,7 +94,7 @@
                     <div class="body">
                      
                         @foreach ($post->tags as $tag)
-                    <span style="font-size: 15px" class="label bg-orange">{{ $tag->name }}</span>
+                    <span style="font-size: 15px; " class="label bg-orange mb-2">{{ $tag->name }}</span>
                         @endforeach
                      
                     </div>
@@ -170,7 +187,45 @@ function approvePost(id){
          )
          }
      })
-}	
+}
+
+
+
+function deletePost(id){
+           const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    
+                    event.preventDefault();
+                    document.getElementById('delete-form-'+id).submit();
+            
+                } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+                }
+            })
+       }
 
 </script>
 

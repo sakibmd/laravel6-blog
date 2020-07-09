@@ -45,6 +45,8 @@
 
     </div><!-- slider -->
 
+   
+
     <section class="blog-area section">
         <div class="container">
 

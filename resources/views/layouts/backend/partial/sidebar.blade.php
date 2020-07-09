@@ -32,8 +32,7 @@
     <!-- Menu -->
     <div class="menu">
         <ul class="list">
-            <li class="header">MAIN NAVIGATION</li>
-
+           
 
             @if (Request::is('admin*'))
                 <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
@@ -90,6 +89,14 @@
                         <span>All Comments</span>
                     </a>
                 </li>
+
+                <li class="{{ Request::is('admin/report') ? 'active' : '' }}">
+                    <a href="{{ route('admin.report.show') }}">
+                        <i class="material-icons">report</i>
+                        <span>All Post Reports</span>
+                    </a>
+                </li>
+
                 <li class="header">System</li>
                 <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
                     <a href="{{ route('admin.settings') }}">
