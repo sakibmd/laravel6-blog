@@ -21,7 +21,8 @@ Route::get('/category/{slug}', 'PostController@postByCategory')->name('category.
 Route::get('/tag/{slug}', 'PostController@postByTag')->name('tag.posts');
 
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
-Route::post('report', 'SubscriberController@report')->name('report.store');
+Route::post('reportPost', 'SubscriberController@report')->name('report.store');
+Route::post('reportComment', 'SubscriberController@reportComment')->name('reportComment.store');
 
 Route::get('search' , 'SearchController@search')->name('search'); 
 
@@ -73,6 +74,10 @@ Route::group([
 
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
+
+    Route::get('reported-comments','CommentController@reportedCommentShow')->name('reportedComment.index');
+    Route::delete('reported-comments/{id}','CommentController@reportedCommentdestroy')->name('reportedComment.destroy');
+    Route::delete('reported-comment-from-list/{id}','CommentController@reportedCommentRemove')->name('reportedCommentRemove.destroy');
 
     Route::get('author','AuthorController@index')->name('author.index');
     Route::delete('author/{id}','AuthorController@destroy')->name('author.destroy');

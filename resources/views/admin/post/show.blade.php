@@ -202,7 +202,6 @@ function deletePost(id){
             
             swalWithBootstrapButtons.fire({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes, delete it!',
@@ -220,8 +219,6 @@ function deletePost(id){
                 ) {
                 swalWithBootstrapButtons.fire(
                     'Cancelled',
-                    'Your imaginary file is safe :)',
-                    'error'
                 )
                 }
             })

@@ -97,6 +97,13 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::is('admin/reported-comments') ? 'active' : '' }}">
+                    <a href="{{ route('admin.reportedComment.index') }}">
+                        <i class="material-icons">report</i>
+                        <span>All Comments Reports</span>
+                    </a>
+                </li>
+
                 <li class="header">System</li>
                 <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
                     <a href="{{ route('admin.settings') }}">

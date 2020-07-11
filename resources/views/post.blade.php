@@ -43,7 +43,7 @@
 						<div class="blog-post-inner">
 
 							 @if (session()->has('report'))
-								<div class="alert alert-success m-3 text-center" role="alert">
+								<div class="alert alert-success m-3 text-center" id="report" role="alert">
 									{{ session()->get('report') }}
 								</div>
 							@endif 
@@ -163,7 +163,9 @@
 												<input type="radio" id="3" name="report" value="Spam & Scam">
 												<label for="3">Spam & Scam</label> <br>
 												<input type="radio" id="4" name="report" value="It's threatening and violent">
-												<label for="4">It's threatening and violent</label> 
+												<label for="4">It's threatening and violent</label> <br>
+												<input type="radio" id="5" name="report" value="Others">
+												<label for="5">Others</label> 
 
 												</div>
 											</div>
@@ -315,6 +317,8 @@
 				@foreach ($post->comments as $comment)
 					<div class="commnets-area ">
 
+						
+
 						<div class="comment">
 
 							<div class="post-info">
@@ -328,8 +332,27 @@
 									<h6 class="date"> on {{ $comment->created_at->diffforhumans() }}</h6>
 								</div>
 
+
+
 								<div class="right-area">
-									<h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
+									<h5 class="reply-btn" >
+					<button class="btn btn-danger waves-effect m-auto" type="button" onclick="reportComment({{ $comment->id }})">
+											Report
+					</button>
+									 
+										 <form id="report-comment-{{ $comment->id }}" action="{{ route('reportComment.store') }}"
+											 method="POST" style="display: none;">
+											 @csrf
+											
+											<input type="hidden" name="post_id" value="{{ $post->id }}">
+											<input type="hidden" name="commented_by" value="{{ $comment->user->name }}">
+											<input type="hidden" name="comment" value="{{ $comment->comment }}">
+											<input type="hidden" name="commentId" value="{{ $comment->id }}">
+											
+
+										 </form>
+
+									</h5>
 								</div>
 
 							</div><!-- post-info -->
@@ -364,6 +387,40 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript">
+function reportComment(id){
+           const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure to report?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, report it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    
+                    event.preventDefault();
+                    document.getElementById('report-comment-'+id).submit();
+            
+                } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                )
+                }
+            })
+	   }
+	   
+
     function fav(){
         Swal.fire({
             title: 'To Add Your Favorite List, You Need To Login First!',
@@ -385,7 +442,12 @@
                         popup: 'animated fadeOutUp faster'
                     }
                     })
-            }	
+			}	
+			
+
+			setTimeout(function() {
+				$('#report').fadeOut('fast');
+			}, 5000);
 </script>
 
 @endpush

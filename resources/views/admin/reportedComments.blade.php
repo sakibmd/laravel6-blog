@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Report')
+@section('title', 'Post Comments')
 
 @push('css')
     <!-- JQuery DataTable Css -->
@@ -12,11 +12,13 @@
 
 <div class="container-fluid">
     
+
     @if (session()->has('success'))
-          <div class="alert alert-success m-3" role="alert">
-              {{ session()->get('success') }}
-          </div>
+        <div class="alert alert-success m-3" role="alert">
+            {{ session()->get('success') }}
+        </div>
     @endif
+
 
    
     <!-- Exportable Table -->
@@ -25,8 +27,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        All POST REPORTS
-                    <span style="font-size: 15px;" class="badge bg-red">{{ $posts->count()  }}</span>
+                        All REPORTED COMMENT
+                    <span class="badge bg-red">{{ $rc->count()  }}</span>
                     </h2>
                     
                 </div>
@@ -35,46 +37,69 @@
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Reported By</th>
-                                    <th>Title</th>
-                                    <th>Reason</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Comment Info</th>
+                                    <th>Post Info</th>
+                                    <th>Delete this comment</th>
+                                    <th>Remove this report</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Reported By</th>
-                                    <th>Title</th>
-                                    <th>Reason</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Comment Info</th>
+                                    <th>Post Info</th>
+                                    <th>Delete this comment</th>
+                                     <th>Remove this report</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($posts as $key=>$post)
+                                @foreach ($rc as $key=>$rc)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $post->reported_by }}</td>
-                                    <td>{{ str_limit($post->post_title, 20) }}</td>
-                                    <td>{{ $post->reason }}</td>
-                                    <td>{{ $post->created_at->toFormattedDateString()  }}</td>
-                                    <td class="text-center">
-                                       
- <a href="{{ route('admin.post.show',$post->post_id) }}" class="btn btn-info waves-effect">
-                                            <i class="material-icons">visibility</i>
-  </a>
-                                 <button class="btn btn-danger waves-effect" type="button" onclick="deletePost({{ $post->id }})">
-                                            <i class="material-icons">delete</i>
-                                        </button>
-                          
-                                        <form id="delete-form-{{ $post->id }}" action="{{ route('admin.report.destroy',$post->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                     </td>
+                                  
+                                    <td>
+                                        <div class="media">
+                                         
+                                    <div class="media-body">
+                                            <h4 class="media-heading">{{ $rc->commented_by }}
+                                            <small>{{ $rc->created_at->diffForHumans() }} </small> </h4>
+                                            <p> {{ $rc->comment }} </p>
+                                            
+                                        </div>     
+                                        </div> 
+                                </td> 
+                                   
+                                <td> 
+                                     <div class="media">
+                                        
+                                        
+                                        <div class="media-body">
+                                           
+                                            <h4 class="media-heading">{{ str_limit($rc->post_title), '40' }}  </h4> </a>
+                                            
+                                            <p>By <strong>{{ $rc->post_creatorName }}</strong>  </p>
+                                        </div>
+                                    </div> 
+                                </td> 
+                                <td> 
+                                    <button class="btn btn-danger waves-effect" type="button" onclick="deleteComment({{ $rc->comment_id }})">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                   
+                                    <form id="delete-form-{{ $rc->comment_id }}" action="{{ route('admin.reportedComment.destroy',$rc->comment_id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td> 
+                                <td>
+                                    <button class="btn btn-danger waves-effect" type="button" onclick="deleteComment({{ $rc->id }})">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                   
+                                    <form id="delete-form-{{ $rc->id }}" action="{{ route('admin.reportedCommentRemove.destroy',$rc->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -107,7 +132,7 @@
 
        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
        <script type="text/javascript">
-       function deletePost(id){
+       function deleteComment(id){
            const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                 confirmButton: 'btn btn-success',
@@ -127,6 +152,9 @@
                 if (result.value) {
                     
                     event.preventDefault();
+
+
+                    
                     document.getElementById('delete-form-'+id).submit();
             
                 } else if (
@@ -140,5 +168,8 @@
             })
        }	
    
+      
+
+
        </script>
 @endpush
