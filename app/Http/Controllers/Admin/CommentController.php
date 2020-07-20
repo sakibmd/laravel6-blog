@@ -20,20 +20,7 @@ class CommentController extends Controller
     }
 
 
-    public function reportedCommentShow(){
-        $rc = ReportComment::latest()->get();
-        return view('admin.reportedComments',compact('rc'));
-    }
-
-    public function reportedCommentdestroy($id){
-        Comment::findOrFail($id)->delete();
-        return redirect()->back()->with('success','Comment Deleted Successfully');
-   }
-
-   public function reportedCommentRemove($id){
-    ReportComment::findOrFail($id)->delete();
-    return redirect()->back()->with('success','Report Deleted Successfully');
-}
+    
 
 
 }

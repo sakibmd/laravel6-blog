@@ -40,7 +40,7 @@
                                     <th>Comment Info</th>
                                     <th>Post Info</th>
                                     <th>Delete this comment</th>
-                                    <th>Remove this report</th>
+                                    <th>Remove this report from report list</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -48,7 +48,7 @@
                                     <th>Comment Info</th>
                                     <th>Post Info</th>
                                     <th>Delete this comment</th>
-                                     <th>Remove this report</th>
+                                     <th>Remove this report from report list</th>
                                 </tr>
                             </tfoot>
                             <tbody>

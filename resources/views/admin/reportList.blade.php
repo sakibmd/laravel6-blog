@@ -63,7 +63,7 @@
                                     <td>{{ $post->created_at->toFormattedDateString()  }}</td>
                                     <td class="text-center">
                                        
- <a href="{{ route('admin.post.show',$post->post_id) }}" class="btn btn-info waves-effect">
+ <a href="{{ route('admin.reportedPostShow',$post->post_id) }}" class="btn btn-info waves-effect">
                                             <i class="material-icons">visibility</i>
   </a>
                                  <button class="btn btn-danger waves-effect" type="button" onclick="deletePost({{ $post->id }})">

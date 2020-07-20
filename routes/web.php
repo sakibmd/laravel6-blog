@@ -21,8 +21,8 @@ Route::get('/category/{slug}', 'PostController@postByCategory')->name('category.
 Route::get('/tag/{slug}', 'PostController@postByTag')->name('tag.posts');
 
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
-Route::post('reportPost', 'SubscriberController@report')->name('report.store');
-Route::post('reportComment', 'SubscriberController@reportComment')->name('reportComment.store');
+Route::post('reportPost', 'ReportController@reportOnAPost')->name('report.store');
+Route::post('reportComment', 'ReportController@reportOnAComment')->name('reportComment.store');
 
 Route::get('search' , 'SearchController@search')->name('search'); 
 
@@ -69,15 +69,17 @@ Route::group([
     Route::get('subscriber','SubscriberController@index')->name('subscriber.index');
     Route::delete('subscriber/{subscriber}','SubscriberController@deleteSubscriberFunction')->name('subscriber.destroy');
 
-    Route::get('report','SubscriberController@showAllReport')->name('report.show');
-    Route::delete('report/{report}','SubscriberController@deleteReport')->name('report.destroy');
+    Route::get('reported-post','ReportController@showAllReport')->name('report.show');
+    Route::delete('report/{report}','ReportController@deleteReport')->name('report.destroy');
+    Route::get('reported-post/{id}','ReportController@reportedPostShow')->name('reportedPostShow');
+    Route::delete('admin/reported-post/{post}','ReportController@deleteReportedPost')->name('reportedPost.destroy');
 
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
 
-    Route::get('reported-comments','CommentController@reportedCommentShow')->name('reportedComment.index');
-    Route::delete('reported-comments/{id}','CommentController@reportedCommentdestroy')->name('reportedComment.destroy');
-    Route::delete('reported-comment-from-list/{id}','CommentController@reportedCommentRemove')->name('reportedCommentRemove.destroy');
+    Route::get('reported-comments','ReportController@reportedCommentShow')->name('reportedComment.index');
+    Route::delete('reported-comments/{id}','ReportController@reportedCommentdestroy')->name('reportedComment.destroy');
+    Route::delete('reported-comment-from-list/{id}','ReportController@reportedCommentRemoveFromReportList')->name('reportedCommentRemove.destroy');
 
     Route::get('author','AuthorController@index')->name('author.index');
     Route::delete('author/{id}','AuthorController@destroy')->name('author.destroy');

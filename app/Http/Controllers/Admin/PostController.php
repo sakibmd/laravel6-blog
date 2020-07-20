@@ -170,7 +170,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-
+        
         return view('admin.post.show', compact('post')); 
     }
 
@@ -273,8 +273,8 @@ class PostController extends Controller
          $post->categories()->detach();
          $post->tags()->detach();
          $post->delete();
-         //return redirect(route('admin.post.index'))->with('success', 'Post Deleted Successfully');
-         return redirect(route('admin.report.show'))->with('success', 'Post Deleted Successfully');
+         return redirect(route('admin.post.index'))->with('success', 'Post Deleted Successfully');
+         //return redirect(route('admin.report.show'))->with('success', 'Post Deleted Successfully');
         
     }
 }

@@ -90,7 +90,7 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('admin/report') ? 'active' : '' }}">
+                <li class="{{ Request::is('admin/reported-post*') ? 'active' : '' }}">
                     <a href="{{ route('admin.report.show') }}">
                         <i class="material-icons">report</i>
                         <span>All Post Reports</span>
