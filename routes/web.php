@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('mainhome');
 
+Auth::routes(['verify' => true]);
 
 Route::get('posts', 'PostController@index')->name('post.index');
 Route::get('post/{slug}', 'PostController@details')->name('post.details');
@@ -44,7 +45,7 @@ Route::group([
     'prefix' => 'admin', 
     'namespace' => 'Admin', 
     'middleware' => [ 
-        'auth', 'admin' 
+        'auth', 'admin', 'verified',
     ]
 ], function () {
     Route::get('dashboard','DashboardController@index')->name('dashboard');
@@ -53,9 +54,6 @@ Route::group([
     Route::get('/favorite','FavoriteController@index')->name('favorite.index');
 
     Route::get('settings','SettingsController@index')->name('settings');
-
-    // Route::get('report','PostController@report')->name('post.report');
-
     Route::put('profile-update','SettingsController@updateProfile')->name('profile.update');
     Route::put('password-update','SettingsController@updatePassword')->name('password.update');
 
@@ -90,7 +88,7 @@ Route::group([
     'prefix' => 'author', 
     'namespace' => 'Author', 
     'middleware' => [ 
-    'auth', 'author' 
+    'auth', 'author' , 'verified'
     ]
 ], function () {
     Route::get('dashboard','DashboardController@index')->name('dashboard');

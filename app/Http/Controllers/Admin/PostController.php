@@ -116,23 +116,6 @@ class PostController extends Controller
 
 
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function pending(){
