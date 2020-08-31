@@ -1,3 +1,40 @@
+<h3>This is a Tech Blog website. I have used LARAVEL framework version 6.x and MySql database for this project. </h3
+
+<h3>Features Include: </h3> 
+
+    --> Admin Panel / Member Panel
+    --> Manage Categories
+    --> Manage Tags
+    --> Manage posts
+    --> Post Approval from admin
+    --> Email Notification
+    --> Email Verification for creating a new account
+    --> Validate Information
+    --> Category & tag Wise Post publish ability
+    --> Show Category Wise Data
+    --> Search for a post
+    --> Profile Update & reset update option
+    --> View Count
+    --> Comment System
+    --> Post Reporting & comment reporting option
+    --> Category wise & tag wise post show
+    --> Use Intervention Image Library
+    --> Use Eloquent ORM for database relationship handling
+    --> And so on.........
+    
+<h3>Technology: </h3> 
+
+    --> HTML
+    --> CSS
+    --> Bootstrap
+    --> JQuery 
+    --> Few Javascript
+    --> Mysql
+    --> Laravel Framework
+    
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
