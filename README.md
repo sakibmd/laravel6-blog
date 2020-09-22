@@ -1,26 +1,94 @@
 <h3>This is a Tech Blog website. I have used LARAVEL framework version 6.x and MySql database for this project. </h3
 
-<h3>Features Include: </h3> 
+  <h3>Features : login, registration, admin/author panel, email verification, password reset, forget password, like, comment, view count, manage tags, manage                      categories, email notification sending realtime, admin approval setting, post & comment reporting, post publishing schedule wise, profile update, subscriber handling  etc...</h3> 
 
-    --> Admin Panel / Member Panel
-    --> Manage Categories
-    --> Manage Tags
-    --> Manage posts
-    --> Post Approval from admin
-    --> Email Notification
-    --> Email Verification for creating a new account
-    --> Validate Information
-    --> Category & tag Wise Post publish ability
-    --> Show Category Wise Data
-    --> Search for a post
-    --> Profile Update & reset update option
-    --> View Count
-    --> Comment System
-    --> Post Reporting & comment reporting option
-    --> Category wise & tag wise post show
-    --> Use Intervention Image Library
-    --> Use Eloquent ORM for database relationship handling
-    --> And so on.........
+<h2>For Admin:</h2>
+
+
+1. Category wise post publishes ability and sees number of post on that category.
+
+2. Tag wise post publishes ability and sees number of post on that tag.
+
+3. Ability to approve and publish post.
+
+4. See all category types and ability to create new category & edit/remove them.
+
+5. See all tags and ability to create new tag & edit/remove them.
+
+6. See all pending post.
+
+7. See all posts comments and ability to delete rough comment.
+
+8. Ability to analyze posts like view and comments.
+
+9. Control all author activity.
+
+10. Admin can change his profile information.
+
+11. Admin can reset his password.
+
+12. Admin can see top 10 active author.
+
+13. Admin can see all subscriber list and delete subscriber.
+
+14. If author make a post then admin will get a email notification for approve.
+
+15. Sign in/sign out
+
+16. Can handle reported posts & comment
+
+
+<h2>For Author:</h2>
+
+
+1. Author can post.
+
+2. Sign in/sign out
+
+3. Author can view total number of post
+
+4. Author can see his pending post list 
+
+5. Author can edit and delete his post
+
+6. Author can see his favorite post list
+
+7. Author can see all the comments section
+
+8. Author has ability to change his profile info
+
+9. Can ability to reset his password
+
+10. Can add new category and ability to edit, delete his own created category
+
+11. Have settings option for change his profile information
+
+12. Have a nice dashboard where he sees the summery of all latest posts & comments etc....
+
+
+<h2>For Guest user: </h2>
+
+
+1. User can see all post.
+
+2. User can like a post.
+
+3. User can see category wise post
+
+4. User can see tag wish post
+
+5. User can search for a post
+
+6. User can see popular post.
+
+7. User can see latest post.
+
+8. User can subscribe our website.
+
+9. User can report a post (if any harmful post publish)
+
+10. User can report a comment.
+
     
 <h3>Technology: </h3> 
 
